@@ -19,8 +19,15 @@ public class Main2 {
 			if (cmd.equals("exit")) {
 				break;
 			} else if (cmd.equals("article list")) {
-
-				System.out.println("게시물이 존재하지 않습니다.");
+				if(lists.size()==0)	System.out.println("게시물이 존재하지 않습니다.");
+				else {
+					for(Articles a : lists) {
+						System.out.println("작성자 : "+a.id);
+						System.out.println("제목 : "+a.title);
+						System.out.println("내용 : "+a.contents);
+						System.out.println("================");
+					}
+				}
 
 			} else if (cmd.equals("article write")) {
 				System.out.printf("작성자를 입력해주세요 : ");
@@ -39,7 +46,23 @@ public class Main2 {
 			} else if (cmd.equals("") || cmd.length() == 0) {
 				System.out.println("명령어를 입력해 주세요.");
 			} else if (cmd.equals("article search")) {	
-
+				System.out.println("검색어 입력해 주세요. : ");
+				int isExist = 0;
+				String str= sc.nextLine();
+				for(Articles a : lists) {
+					if( a.id.contains(str) || a.contents.contains(str) || a.title.contains(str)) {
+						System.out.println("작성자 : "+a.id);
+						System.out.println("제목 : "+a.title);
+						System.out.println("내용 : "+a.contents);
+						System.out.println("================");
+						isExist = 1;
+						break;
+					}else {
+						continue;
+					}
+				}
+				if(isExist > 0) System.out.println("찾은 결과는 위와 같습니다.");
+				else System.out.println("결과을 찾지 못했습니다.");
 			} else {
 				System.out.println("존재하지 않는 명령어 입니다.");
 			}
